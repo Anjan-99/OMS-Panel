@@ -18,7 +18,7 @@ def index(request):
                 exchange = str(request.POST.get('exchange'))
                 symbol = str(request.POST.get('symbol'))
                 stopLoss = float(request.POST.get('stopLoss'))
-                type = str(request.POST.get('type'))
+                types = str(request.POST.get('type'))
                 lotsize = float(request.POST.get('lot_size'))
                 
                 symbol = symbol.replace('/','')
@@ -40,7 +40,7 @@ def index(request):
                             price = price['price']
                             
                             
-                            if type == 'Market':
+                            if types == 'Market':
                                 if stopLoss < float(price):
                                     try:
                                         order = client.create_test_order(
@@ -50,12 +50,15 @@ def index(request):
                                             quantity= lot
                                             )
                                         print(order)
-                                        tracked[symbol] = {'exchange': exchange,'type': type ,'side': 'LONG', 'price': price, 'lotsize': lot, 'stopLoss': stopLoss}
+                                        tracked[symbol] = {'exchange': exchange,'type': types ,'side': 'LONG', 'price': price, 'lotsize': lot, 'stopLoss': stopLoss}
                                         #make json name tracked.json
                                         with open('tracked.json', 'w') as f:
                                             json.dump(tracked, f)
                                     except Exception as e:
-                                        return HttpResponse(f'Order Failed {e}')
+                                        #use rejex to get the error message
+                                        e = str(e).split(':')
+                                        e = e[1]
+                                        return render(request, 'hello.html', {'error': e,'order_history': tracked})
                                 elif stopLoss > float(price):
                                     #place test order for short position
                                     try:
@@ -66,23 +69,25 @@ def index(request):
                                             quantity= lot
                                         )
                                         print(order)
-                                        tracked[symbol] = {'exchange': exchange,'type': type ,'side': 'SHORT', 'price': price, 'lotsize': lot, 'stopLoss': stopLoss}
+                                        tracked[symbol] = {'exchange': exchange,'type': types ,'side': 'SHORT', 'price': price, 'lotsize': lot, 'stopLoss': stopLoss}
                                         #make json name tracked.json
                                         with open('tracked.json', 'w') as f:
                                             json.dump(tracked, f)
                                     except Exception as e:
-                                        return HttpResponse(f'Order Failed {e}')        
+                                        e = str(e).split(':')
+                                        e = e[1]
+                                        return render(request, 'hello.html', {'error': e,'order_history': tracked})       
                         else:
                             e = 'Order for this symbol is already placed.'
-                            return  render(request, 'hello.html', {'error': e})
+                            return  render(request, 'hello.html', {'error': e,'order_history': tracked})
                         
                     
                 else:
                     e = 'Please select a valid exchange.'
-                    return  render(request, 'hello.html', {'error': e})
+                    return  render(request, 'hello.html', {'error': e,'order_history': tracked})
             except Exception as e:
                 e = 'please try again with valid inputs.'
-                return  render(request, 'hello.html', {'error': e})
+                return  render(request, 'hello.html', {'error': e,'order_history': tracked} )
         else:
             #read the json
             with open('tracked.json', 'r') as f:
@@ -96,6 +101,5 @@ def index(request):
    
     with open('tracked.json', 'r') as f:
         tracked = json.load(f)
-    print(tracked)
     return render(request, 'hello.html',{'order_history': tracked})
 
