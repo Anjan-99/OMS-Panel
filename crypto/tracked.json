@@ -1,1 +1,1 @@
-{}
+{"BTCUSDT": {"exchange": "Binance", "type": "Market", "side": "LONG", "price": "68237.09000000", "lotsize": 10.0, "stopLoss": 62770.0}, "XRPUSDT": {"exchange": "Binance", "type": "Market", "side": "SHORT", "price": "0.62240000", "lotsize": 10.0, "stopLoss": 62770.0}}
