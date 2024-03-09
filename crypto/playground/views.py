@@ -16,12 +16,11 @@ from ks_api_client import ks_api
 def index(request):
     if request.method == 'POST':
         try:
-            print(request.POST)
+            print(request.POST, 'post')
             exchange = str(request.POST.get('exchange'))
             symbol = str(request.POST.get('symbol'))
             stopLoss = float(request.POST.get('stopLoss'))
             symbol = symbol.replace('/','')
-
 
             if exchange == 'Binance':
 
