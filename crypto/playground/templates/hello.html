@@ -294,7 +294,7 @@
                 <div class="dropdown">
 
                   <!-- Toggle -->
-                  <button class="btn btn-danger">
+                  <button class="btn btn-danger" id="senddata">
                     Close Position
                   </button>
                 </div>
@@ -464,5 +464,50 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var checkboxes = document.querySelectorAll('.list-checkbox');
+      var closePositionButton = document.getElementById('senddata');
+
+      closePositionButton.addEventListener('click', function () {
+          var checkedSymbols = Array.from(checkboxes)
+              .filter(function (checkbox) {
+                  return checkbox.checked;
+              })
+              .map(function (checkbox) {
+                  return checkbox.closest('tr').querySelector('.item-symbol').innerText;
+              });
+
+          // Check if at least one checkbox is checked
+          if (checkedSymbols.length > 0) {
+              // Send a POST request with the selected symbols
+              var formData = new FormData();
+              formData.append('selected_symbols', JSON.stringify(checkedSymbols));
+
+              fetch('', {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                      'X-CSRFToken': '{{ csrf_token }}',  // Add this line if using Django's CSRF protection
+                      // Add other headers if needed
+                  },
+              })
+              .then(response => response.json())
+              .then(data => {
+                  console.log('POST request successful:', data);
+                  
+                  // You can perform additional actions based on the server response if needed
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+              location.reload();
+          } else {
+              console.log('No checkboxes are selected.');
+              // Handle the case where no checkboxes are selected
+          }
+      });
+  });
+</script>
 
 </html>
