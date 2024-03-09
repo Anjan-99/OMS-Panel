@@ -258,7 +258,7 @@
                 </div>
 
               </div>
-              
+
             </div> <!-- / .row -->
 
             <!-- Button -->
@@ -334,6 +334,9 @@
                       <a class="list-sort text-muted" data-sort="item-exchange" href="#">Exchange</a>
                     </th>
                     <th>
+                      <a class="list-sort text-muted" data-sort="item-type" href="#">Type</a>
+                    </th>
+                    <th>
                       <a class="list-sort text-muted" data-sort="item-side" href="#">Side</a>
                     </th>
                     <th>
@@ -371,12 +374,22 @@
                       <span class="item-exchange">{{ order_info.exchange }}</span>
 
                     </td>
-
                     <td>
 
-                      <!-- Phone -->  
-                      <a class="item-side text-reset badge bg-soft-success">{{ order_info.side }}</a>
+                      <!-- Text -->
+                      <span class="item-type">{{ order_info.type }}</span>
 
+                    </td>
+
+                    <td>
+                      {% if order_info.side == 'LONG' %}
+                      <a class="item-side text-reset badge bg-soft-success">{{ order_info.side }}</a>
+                      {% elif order_info.side == 'SHORT' %}
+                      <a class="item-side text-reset badge bg-soft-danger">{{ order_info.side }}</a>
+                      {% else %}
+                      <!-- Handle other cases if needed -->
+                      <a class="item-side text-reset badge">{{ order_info.side }}</a>
+                      {% endif %}
                     </td>
                     <td>
 
