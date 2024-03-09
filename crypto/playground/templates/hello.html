@@ -66,7 +66,8 @@
           </h2>
         </div>
         <div class="card-body">
-          <form>
+          <form method="post">
+            {% csrf_token  %}
             <div class="row">
               <div class="col-12 col-md-4">
 
@@ -79,11 +80,11 @@
                   </label>
 
                   <!-- drowpdown -->
-                  <select class="form-select mb-3" data-choices>
+                  <select class="form-select mb-3" data-choices name="exchange">
                     <option value="none">Select Exchange</option>
                     <option value="binance">Binance</option>
                     <option value="kotak_security">Kotak Security</option>
-                  </select>
+                  </select> 
                 </div>
 
               </div>
@@ -193,7 +194,7 @@
                   </label>
 
                   <!-- Dropdown -->
-                  <select class="form-select mb-3" data-choices>
+                  <select class="form-select mb-3" data-choices name="type">
                     <option value="none">Select Type</option>
                     <option value="market">Market</option>
                   </select>
@@ -213,7 +214,7 @@
                   </label>
 
                   <!-- drowpdown -->
-                  <select class="form-select mb-3" data-choices>
+                  <select class="form-select mb-3" data-choices name="side">
                     <option value="none">Select Side</option>
                     <option value="buy">Buy</option>
                     <option value="sell">Sell</option>
@@ -232,7 +233,7 @@
                   </label>
 
                   <!-- input -->
-                  <input type="number" id="lot_size" class="form-control" placeholder="0" />
+                  <input type="number" id="lot_size" class="form-control" placeholder="0" name="lot_size"/>
 
                 </div>
 
@@ -248,7 +249,7 @@
                   </label>
 
                   <!-- input -->
-                  <input type="number" id="stop_loss" class="form-control" placeholder="0.00" />
+                  <input type="number" id="stop_loss" class="form-control" placeholder="0.00" name="stopLoss"/>
                 </div>
 
               </div>
