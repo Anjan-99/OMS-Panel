@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
-  <link rel="shortcut icon" href= "{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
   <link rel="stylesheet" href="{% static 'css/libs.bundle.css' %}" />
   <link rel="stylesheet" href="{% static 'css/theme.bundle.css' %}" />
@@ -16,7 +16,7 @@
       width: 100%;
       height: 13rem;
       overflow: auto;
-  }
+    }
   </style>
 </head>
 
@@ -26,9 +26,9 @@
         data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false"
         aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <a class="navbar-brand"
         href="./index.html"> <img src="{% static 'img/logo.svg' %}" class="navbar-brand-img mx-auto" alt="..."> </a>
-      
+
       <div class="collapse navbar-collapse" id="sidebarCollapse">
-        
+
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link" href="#sidebarDashboards" data-toggle="collapse" role="button"
               aria-expanded="true" aria-controls="sidebarDashboards"> <i class="fe fe-home"></i> Dashboards </a>
@@ -67,7 +67,7 @@
         </div>
         <div class="card-body">
           <form method="post">
-            {% csrf_token  %}
+            {% csrf_token %}
             <div class="row">
               <div class="col-12 col-md-4">
 
@@ -84,7 +84,7 @@
                     <option value="none">Select Exchange</option>
                     <option value="binance">Binance</option>
                     <option value="kotak_security">Kotak Security</option>
-                  </select> 
+                  </select>
                 </div>
 
               </div>
@@ -100,7 +100,7 @@
 
                   <!-- Dropdown -->
 
-                  <select class="form-select mb-3 containerInner"  data-choices>
+                  <select class="form-select mb-3 containerInner" data-choices>
                     <option value="none">Select Symbol</option>
                     <option value="btc">BTC/USDT</option>
                     <option value="eth">ETH/USDT</option>
@@ -138,46 +138,46 @@
                     <option value="sys">SYS/USDT</option>
                     <option value="gnt">GNT/USDT</option>
                     <option value="sol">SOL/USDT</option>
-                    <option value="usdc">USDC/USDT</option>
-                    <option value="shib">SHIB/USDT</option>
-                    <option value="avax">AVAX/USDT</option>
-                    <option value="matic">MATIC/USDT</option>
-                    <option value="wbtc">WBTC/USDT</option>
-                    <option value="bch">BCH/USDT</option>
-                    <option value="icp">ICP/USDT</option>
-                    <option value="apt">APT/USDT</option>
-                    <option value="op">OP/USDT</option>
-                    <option value="xem">XEM/USDT</option>
-                    <option value="sushi">SUSHI/USDT</option>
-                    <option value="yfi">YFI/USDT</option>
-                    <option value="snx">SNX/USDT</option>
-                    <option value="ren">REN/USDT</option>
-                    <option value="1inch">1INCH/USDT</option>
-                    <option value="ocean">OCEAN/USDT</option>
-                    <option value="crv">CRV/USDT</option>
-                    <option value="bal">BAL/USDT</option>
-                    <option value="chz">CHZ/USDT</option>
-                    <option value="enj">ENJ/USDT</option>
-                    <option value="ftt">FTT/USDT</option>
-                    <option value="hbar">HBAR/USDT</option>
-                    <option value="hot">HOT/USDT</option>
-                    <option value="ksm">KSM/USDT</option>
-                    <option value="lrc">LRC/USDT</option>
-                    <option value="mkr">MKR/USDT</option>
-                    <option value="omg">OMG/USDT</option>
-                    <option value="pax">PAX/USDT</option>
-                    <option value="qtum">QTUM/USDT</option>
-                    <option value="rvn">RVN/USDT</option>
-                    <option value="srm">SRM/USDT</option>
-                    <option value="stmx">STMX/USDT</option>
-                    <option value="sxp">SXP/USDT</option>
-                    <option value="tomo">TOMO/USDT</option>
-                    <option value="trb">TRB/USDT</option>
-                    <option value="twt">TWT/USDT</option>
-                    <option value="usdt">USDT/USDT</option>
-                    <option value="vtho">VTHO/USDT</option>
-                    <option value="xvs">XVS/USDT</option>
-                    <option value="zil">ZIL/USDT</option>
+                    <option>USDC/USDT</option>
+                    <option>SHIB/USDT</option>
+                    <option>AVAX/USDT</option>
+                    <option>MATIC/USDT</option>
+                    <option>WBTC/USDT</option>
+                    <option>BCH/USDT</option>
+                    <option>ICP/USDT</option>
+                    <option>APT/USDT</option>
+                    <option>OP/USDT</option>
+                    <option>XEM/USDT</option>
+                    <option>SUSHI/USDT</option>
+                    <option>YFI/USDT</option>
+                    <option>SNX/USDT</option>
+                    <option>REN/USDT</option>
+                    <option>1INCH/USDT</option>
+                    <option>OCEAN/USDT</option>
+                    <option>CRV/USDT</option>
+                    <option>BAL/USDT</option>
+                    <option>CHZ/USDT</option>
+                    <option>ENJ/USDT</option>
+                    <option>FTT/USDT</option>
+                    <option>HBAR/USDT</option>
+                    <option>HOT/USDT</option>
+                    <option>KSM/USDT</option>
+                    <option>LRC/USDT</option>
+                    <option>MKR/USDT</option>
+                    <option>OMG/USDT</option>
+                    <option>PAX/USDT</option>
+                    <option>QTUM/USDT</option>
+                    <option>RVN/USDT</option>
+                    <option>SRM/USDT</option>
+                    <option>STMX/USDT</option>
+                    <option>SXP/USDT</option>
+                    <option>TOMO/USDT</option>
+                    <option>TRB/USDT</option>
+                    <option>TWT/USDT</option>
+                    <option>USDT/USDT</option>
+                    <option>VTHO/USDT</option>
+                    <option>XVS/USDT</option>
+                    <option>ZIL/USDT</option>
                   </select>
 
                 </div>
@@ -195,8 +195,8 @@
 
                   <!-- Dropdown -->
                   <select class="form-select mb-3" data-choices name="type">
-                    <option value="none">Select Type</option>
-                    <option value="market">Market</option>
+                    <option>Select Type</option>
+                    <option>Market</option>
                   </select>
 
 
@@ -215,9 +215,9 @@
 
                   <!-- drowpdown -->
                   <select class="form-select mb-3" data-choices name="side">
-                    <option value="none">Select Side</option>
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
+                    <option>Select Side</option>
+                    <option>Buy</option>
+                    <option>Sell</option>
                   </select>
                 </div>
 
@@ -233,7 +233,7 @@
                   </label>
 
                   <!-- input -->
-                  <input type="number" id="lot_size" class="form-control" placeholder="0" name="lot_size"/>
+                  <input type="number" id="lot_size" class="form-control" placeholder="0" name="lot_size" />
 
                 </div>
 
@@ -249,7 +249,7 @@
                   </label>
 
                   <!-- input -->
-                  <input type="number" id="stop_loss" class="form-control" placeholder="0.00" name="stopLoss"/>
+                  <input type="number" id="stop_loss" class="form-control" placeholder="0.00" name="stopLoss" />
                 </div>
 
               </div>
@@ -257,7 +257,7 @@
 
             <!-- Button -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn text-white purple" >
+              <button type="submit" class="btn text-white purple">
                 Make Position
               </button>
 
