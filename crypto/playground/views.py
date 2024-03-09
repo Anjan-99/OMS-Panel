@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 #import binance module in try block
 from binance.client import Client
 from util import *
-from ks_api_client import ks_api
+#from ks_api_client import ks_api
 
 
 # Create your views here.
