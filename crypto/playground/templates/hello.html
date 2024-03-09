@@ -100,7 +100,7 @@
 
                   <!-- Dropdown -->
 
-                  <select class="form-select mb-3 containerInner" data-choices>
+                  <select class="form-select mb-3 containerInner" data-choices name="symbol">
                     <option value="none">Select Symbol</option>
                     <option >BTC/USDT</option>
                     <option >ETH/USDT</option>
@@ -257,7 +257,7 @@
 
             <!-- Button -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn text-white purple">
+              <button type="submit" class="btn text-white btn-danger">
                 Make Position
               </button>
 
@@ -350,45 +350,49 @@
                     </th>
                   </tr>
                 </thead>
+                { % for symbol in content % }
                 <tbody class="list font-size-base">
                   <tr>
                     <td>
 
                       <!-- Email -->
-                      <a class="item-symbol text-reset">BTC/USDT</a>
+                      <a class="item-symbol text-reset">{{ content.symbol }}</a>
 
                     </td>
+                    { % for data in symbol % }
                     <td>
 
                       <!-- Text -->
-                      <span class="item-exchange">Binance</span>
+                      <span class="item-exchange">data.exchange</span>
 
                     </td>
 
                     <td>
 
                       <!-- Phone -->
-                      <a class="item-side text-reset badge bg-soft-success">BUY</a>
+                      <a class="item-side text-reset badge bg-soft-success">data.side</a>
 
                     </td>
                     <td>
 
                       <!-- Badge -->
-                      <span class="item-price">$1100</span>
+                      <span class="item-price">data.price</span>
 
                     </td>
                     <td>
 
                       <!-- Link -->
-                      <a class="item-qty text-reset">10</a>
+                      <a class="item-qty text-reset">data.stopLoss</a>
 
                     </td>
                     <td>
 
                       <!-- Link -->
-                      <a class="item-sl text-reset">$900</a>
+                      <a class="item-sl text-reset">data.stopLoss</a>
 
                     </td>
+                    { % endfor % }
+
                     <td>
 
                       <!-- Checkbox -->
@@ -399,6 +403,7 @@
 
                     </td>
                   </tr>
+                  { % endfor % }
                 </tbody>
               </table>
             </div>
