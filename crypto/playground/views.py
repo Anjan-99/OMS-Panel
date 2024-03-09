@@ -1,10 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import requests
 import json
-import pandas as pd
-from django.shortcuts import redirect
-#import binance module in try block
 from binance.client import Client
 from util import *
 
@@ -32,13 +27,12 @@ def index(request):
                             tracked = json.load(f)
 
                         if symbol not in tracked:
-                        
+                            
                             client = Client(api_key=binance_api_key, api_secret=binance_api_secret, tld='com')
                             price = client.get_symbol_ticker(symbol=symbol)
                             lot = client.get_symbol_info(symbol)
                             lot = lotsize
                             price = price['price']
-                            
                             
                             if types == 'Market':
                                 if stopLoss < float(price):
