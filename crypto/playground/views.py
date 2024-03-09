@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 #import binance module in try block
 from binance.client import Client
 from util import *
-#from ks_api_client import ks_api
+from ks_api_client import ks_api
 
 
 # Create your views here.
@@ -16,7 +16,7 @@ from util import *
 def index(request):
     if request.method == 'POST':
         try:
-            print(request.POST, 'post')
+            print(request.POST)
             exchange = str(request.POST.get('exchange'))
             symbol = str(request.POST.get('symbol'))
             stopLoss = float(request.POST.get('stopLoss'))
@@ -105,5 +105,5 @@ def index(request):
         tracked = json.load(f)
     print(tracked)
 
-    return render(request, 'hello.html ',{'order_history': tracked})
+    return render(request, 'hello.html ',context= tracked)
 

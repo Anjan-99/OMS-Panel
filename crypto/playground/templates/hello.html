@@ -105,7 +105,7 @@
 
                   <!-- Dropdown -->
 
-                  <select class="form-select mb-3 " data-choices>
+                  <select class="form-select mb-3 containerInner" data-choices name="symbol">
                     <option value="none">Select Symbol</option>
                     <option>BTC/USDT</option>
                     <option>ETH/USDT</option>
@@ -262,7 +262,7 @@
 
             <!-- Button -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn btn-color">
+              <button type="submit" class="btn text-white btn-danger">
                 Make Position
               </button>
 
@@ -355,6 +355,7 @@
                     </th>
                   </tr>
                 </thead>
+                { % for symbol in content % }
                 <tbody class="list font-size-base">
                   {% for symbol, order_info in order_history.items %}
                   <tr>
@@ -364,6 +365,7 @@
                       <a class="item-symbol text-reset">{{ symbol }}</a>
 
                     </td>
+                    { % for data in symbol % }
                     <td>
 
                       <!-- Text -->
@@ -386,7 +388,7 @@
                     <td>
 
                       <!-- Link -->
-                      <a class="item-qty text-reset">10</a>
+                      <a class="item-qty text-reset">data.stopLoss</a>
 
                     </td>
                     <td>
@@ -395,6 +397,8 @@
                       <a class="item-sl text-reset">{{ order_info.stopLoss }}</a>
 
                     </td>
+                    { % endfor % }
+
                     <td>
 
                       <!-- Checkbox -->
