@@ -17,6 +17,11 @@
       height: 13rem;
       overflow: auto;
     }
+
+    .btn-color {
+      background-color: #12263F;
+      color: white;
+    }
   </style>
 </head>
 
@@ -100,44 +105,44 @@
 
                   <!-- Dropdown -->
 
-                  <select class="form-select mb-3 containerInner" data-choices>
+                  <select class="form-select mb-3 " data-choices>
                     <option value="none">Select Symbol</option>
-                    <option >BTC/USDT</option>
-                    <option >ETH/USDT</option>
-                    <option >XRP/USDT</option>
-                    <option >LTC/USDT</option>
-                    <option >ADA/USDT</option>
-                    <option >DOGE/USDT</option>
-                    <option >DOT/USDT</option>
-                    <option >UNI/USDT</option>
-                    <option >LINK/USDT</option>
-                    <option >XLM/USDT</option>
-                    <option >TRX/USDT</option>
-                    <option >XMR/USDT</option>
-                    <option >NEO/USDT</option>
-                    <option >ETC/USDT</option>
-                    <option >DASH/USDT</option>
-                    <option >ZEC/USDT</option>
-                    <option >XTZ/USDT</option>
-                    <option >ATOM/USDT</option>
-                    <option >VET/USDT</option>
-                    <option >QTUM/USDT</option>
-                    <option >WAVES/USDT</option>
-                    <option >ONT/USDT</option>
-                    <option >BAT/USDT</option>
-                    <option >ICX/USDT</option>
-                    <option >ALGO/USDT</option>
-                    <option >BNB/USDT</option>
-                    <option >LSK/USDT</option>
-                    <option >ARDR/USDT</option>
-                    <option >STEEM/USDT</option>
-                    <option >NPXS/USDT</option>
-                    <option >DGB/USDT</option>
-                    <option >SC/USDT</option>
-                    <option >BTS/USDT</option>
-                    <option >SYS/USDT</option>
-                    <option >GNT/USDT</option>
-                    <option >SOL/USDT</option>
+                    <option>BTC/USDT</option>
+                    <option>ETH/USDT</option>
+                    <option>XRP/USDT</option>
+                    <option>LTC/USDT</option>
+                    <option>ADA/USDT</option>
+                    <option>DOGE/USDT</option>
+                    <option>DOT/USDT</option>
+                    <option>UNI/USDT</option>
+                    <option>LINK/USDT</option>
+                    <option>XLM/USDT</option>
+                    <option>TRX/USDT</option>
+                    <option>XMR/USDT</option>
+                    <option>NEO/USDT</option>
+                    <option>ETC/USDT</option>
+                    <option>DASH/USDT</option>
+                    <option>ZEC/USDT</option>
+                    <option>XTZ/USDT</option>
+                    <option>ATOM/USDT</option>
+                    <option>VET/USDT</option>
+                    <option>QTUM/USDT</option>
+                    <option>WAVES/USDT</option>
+                    <option>ONT/USDT</option>
+                    <option>BAT/USDT</option>
+                    <option>ICX/USDT</option>
+                    <option>ALGO/USDT</option>
+                    <option>BNB/USDT</option>
+                    <option>LSK/USDT</option>
+                    <option>ARDR/USDT</option>
+                    <option>STEEM/USDT</option>
+                    <option>NPXS/USDT</option>
+                    <option>DGB/USDT</option>
+                    <option>SC/USDT</option>
+                    <option>BTS/USDT</option>
+                    <option>SYS/USDT</option>
+                    <option>GNT/USDT</option>
+                    <option>SOL/USDT</option>
                     <option>USDC/USDT</option>
                     <option>SHIB/USDT</option>
                     <option>AVAX/USDT</option>
@@ -257,7 +262,7 @@
 
             <!-- Button -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn text-white purple">
+              <button type="submit" class="btn btn-color">
                 Make Position
               </button>
 
@@ -351,30 +356,31 @@
                   </tr>
                 </thead>
                 <tbody class="list font-size-base">
+                  {% for symbol, order_info in order_history.items %}
                   <tr>
                     <td>
 
                       <!-- Email -->
-                      <a class="item-symbol text-reset">BTC/USDT</a>
+                      <a class="item-symbol text-reset">{{ symbol }}</a>
 
                     </td>
                     <td>
 
                       <!-- Text -->
-                      <span class="item-exchange">Binance</span>
+                      <span class="item-exchange">{{ order_info.exchange }}</span>
 
                     </td>
 
                     <td>
 
                       <!-- Phone -->
-                      <a class="item-side text-reset badge bg-soft-success">BUY</a>
+                      <a class="item-side text-reset badge bg-soft-success">{{ order_info.side }}</a>
 
                     </td>
                     <td>
 
                       <!-- Badge -->
-                      <span class="item-price">$1100</span>
+                      <span class="item-price">{{order_info.price}}</span>
 
                     </td>
                     <td>
@@ -386,7 +392,7 @@
                     <td>
 
                       <!-- Link -->
-                      <a class="item-sl text-reset">$900</a>
+                      <a class="item-sl text-reset">{{ order_info.stopLoss }}</a>
 
                     </td>
                     <td>
@@ -399,6 +405,7 @@
 
                     </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
