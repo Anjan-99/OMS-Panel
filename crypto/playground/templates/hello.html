@@ -1,517 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A fully featured admin theme which can be used to build CRM, CMS, etc."
+    />
+    <link
+      rel="shortcut icon"
+      href="{% static 'favicon/favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/libs.bundle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/theme.bundle.css' %}" />
+    <title>Dashkit</title>
+    <style>
+      .choices>.dropdown-menu {
+        width: 100%;
+        height: 13rem;
+        overflow: auto;
+      }
 
-<head>
-  {% load static %}
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
-  <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
-  <link rel="stylesheet" href="{% static 'css/libs.bundle.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/theme.bundle.css' %}" />
-  <title>Dashkit</title>
-  <style>
-    .choices>.dropdown-menu {
-      width: 100%;
-      height: 13rem;
-      overflow: auto;
-    }
+      .btn-color {
+        background-color: #12263F;
+        color: white;
+      }
+      .btn-color:disabled {
+        background-color: white;
+        color: black;
+      }
+      .btn-color:hover {
+        background-color: #1f5291;
+        color: white;
+      }
+      .container-static {
+        width: 475px;
+        max-width: 475px; /* Ensure the container doesn't exceed 475px */
+      }
+      
+    </style>
+  </head>
 
-    .btn-color {
-      background-color: #12263F;
-      color: white;
-    }
-  </style>
-</head>
+  <body>
+    <div class="main-content">
+      <!--redu size of the Panel  -->
+      <div class="container-static" style="max-width: 475px">
+        <!-- Tab content -->
+        <div class="card">
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-12 col-md-4">
+                  <!-- First name reduce the size of option -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Exchange </label>
 
-<body>
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light" id="sidebar">
-    <div class="container-fluid"> <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false"
-        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <a class="navbar-brand"
-        href="./index.html"> <img src="{% static 'img/logo.svg' %}" class="navbar-brand-img mx-auto" alt="..."> </a>
+                    <!-- drowpdown -->
+                    <select
+                      class="form-select mb-0"
+                      data-choices
+                      name="exchange"
+                      id="exchange"
+                    >
+                      <option value="none">Select</option>
+                      <option>Binance</option>
+                      <option>Kotak Security</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <!-- Last name -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Symbol </label>
 
-      <div class="collapse navbar-collapse" id="sidebarCollapse">
+                    <!-- Dropdown -->
 
-        <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link" href="#sidebarDashboards" data-toggle="collapse" role="button"
-              aria-expanded="true" aria-controls="sidebarDashboards">
-              <i class="fe fe-home">
-              </i> Dashboards 
-            </a>
-            <div class="collapse" id="sidebarDashboards">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item"> <a href="" class="nav-link active"> OMS </a> </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+                    <select
+                      class="form-select mb-3 containerInner"
+                      data-choices
+                      name="symbol"
+                      id="symbol"
+                    >
+                      <option value="none">Select</option>
+                      <option>BTC/USDT</option>
+                      <option>ETH/USDT</option>
+                      <option>SOL/USDT</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <!-- Last name -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Type </label>
 
-      </div>
-    </div>
-  </nav>
-  <div class="main-content">
-    <div class="header bg-dark pb-5 btn-color">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-end">
-            <div class="col">
-              <br>
-              <h1 class="header-title"> Dashboard </h1>
-            </div>
+                    <!-- Dropdown -->
+                    <select
+                      class="form-select mb-3"
+                      data-choices
+                      name="type"
+                      id="type"
+                    >
+                      <option>Select Type</option>
+                      <option>Limit</option>
+                      <option>Modify</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <!-- First name -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Risk(in $) </label>
+
+                    <!-- make input and it default value is 500 -->
+                    <input
+                      type="number"
+                      id="risk"
+                      class="form-control"
+                      placeholder="0.00"
+                      name="risk"
+                      value="500"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="col-12 col-md-4"
+                  id="stoploss"
+                  style="display: block"
+                >
+                  <!-- First name -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Stop Loss </label>
+
+                    <!-- input -->
+                    <input
+                      type="number"
+                      id="stop_loss"
+                      class="form-control"
+                      placeholder="0.00"
+                      name="stopLoss"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="col-12 col-md-4"
+                  id="modifysl"
+                  style="display: none"
+                >
+                  <!-- First name -->
+                  <div class="form-group">
+                    <!-- Label -->
+                    <label class="form-label"> Modify SL </label>
+
+                    <input
+                      type="number"
+                      id="valmodifysl"
+                      class="form-control"
+                      placeholder="0.00"
+                      name="price"
+                      step="0.01"
+                    />
+                  </div> 
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button
+                  type="button"
+                  class="btn-sm text-white btn-color"
+                  id="breakevenpos"
+                >
+                  B.E. Pos
+                </button>
+                <!-- add space b/w both button -->
+                <div style="width: 10px"></div>
+                <button
+                  type="button"
+                  class="btn-sm btn-color"
+                  id="btnmodifysl"
+                  disabled
+                >
+                  Modify SL
+                </button>
+
+                <div style="width: 10px"></div>
+                <button type="submit" class="btn-sm text-white btn-success">
+                  Make Position
+                </button>
+                <!-- add space b/w both button -->
+                <div style="width: 10px"></div>
+                <button type="button" class="btn-sm btn-danger" id="senddata">
+                  Close Position
+                </button>
+              </div>
+            </form>
+            <script>
+              document
+                .getElementById("type")
+                .addEventListener("change", function () {
+                  if (this.value === "Modify") {
+                    document.getElementById("modifysl").style.display = "block";
+                    document.getElementById("stoploss").style.display = "none";
+                    //enble the button
+                    document.getElementById("btnmodifysl").disabled = false;
+                  } else {
+                    document.getElementById("modifysl").style.display = "none";
+                    document.getElementById("stoploss").style.display = "block";
+                    //disable the button
+                    document.getElementById("btnmodifysl").disabled = true;
+                  }
+                });
+            </script>
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid mt-n6">
-      <!-- Tab content -->
-      <div class="card">
-        <div class="card-header">
-
-          <h2 class="card-header-title">
-            OMS Panel
-          </h2>
-        </div>
-        <div class="card-body">
-          <form method="post">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-12 col-md-4">
-
-                <!-- First name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Exchange
-                  </label>
-
-                  <!-- drowpdown -->
-                  <select class="form-select mb-3" data-choices name="exchange">
-                    <option value="none">Select Exchange</option>
-                    <option>Binance</option>
-                    <option>Kotak Security</option>
-                  </select>
-                </div>
-
-              </div>
-              <div class="col-12 col-md-4">
-
-                <!-- Last name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Symbol
-                  </label>
-
-                  <!-- Dropdown -->
-
-                  <select class="form-select mb-3 containerInner" data-choices name="symbol">
-                    <option value="none">Select Symbol</option>
-                    <option>BTC/USDT</option>
-                    <option>ETH/USDT</option>
-                    <option>XRP/USDT</option>
-                    <option>LTC/USDT</option>
-                    <option>ADA/USDT</option>
-                    <option>DOGE/USDT</option>
-                    <option>DOT/USDT</option>
-                    <option>UNI/USDT</option>
-                    <option>LINK/USDT</option>
-                    <option>XLM/USDT</option>
-                    <option>TRX/USDT</option>
-                    <option>XMR/USDT</option>
-                    <option>NEO/USDT</option>
-                    <option>ETC/USDT</option>
-                    <option>DASH/USDT</option>
-                    <option>ZEC/USDT</option>
-                    <option>XTZ/USDT</option>
-                    <option>ATOM/USDT</option>
-                    <option>VET/USDT</option>
-                    <option>QTUM/USDT</option>
-                    <option>WAVES/USDT</option>
-                    <option>ONT/USDT</option>
-                    <option>BAT/USDT</option>
-                    <option>ICX/USDT</option>
-                    <option>ALGO/USDT</option>
-                    <option>BNB/USDT</option>
-                    <option>LSK/USDT</option>
-                    <option>ARDR/USDT</option>
-                    <option>STEEM/USDT</option>
-                    <option>NPXS/USDT</option>
-                    <option>DGB/USDT</option>
-                    <option>SC/USDT</option>
-                    <option>BTS/USDT</option>
-                    <option>SYS/USDT</option>
-                    <option>GNT/USDT</option>
-                    <option>SOL/USDT</option>
-                    <option>USDC/USDT</option>
-                    <option>SHIB/USDT</option>
-                    <option>AVAX/USDT</option>
-                    <option>MATIC/USDT</option>
-                    <option>WBTC/USDT</option>
-                    <option>BCH/USDT</option>
-                    <option>ICP/USDT</option>
-                    <option>APT/USDT</option>
-                    <option>OP/USDT</option>
-                    <option>XEM/USDT</option>
-                    <option>SUSHI/USDT</option>
-                    <option>YFI/USDT</option>
-                    <option>SNX/USDT</option>
-                    <option>REN/USDT</option>
-                    <option>1INCH/USDT</option>
-                    <option>OCEAN/USDT</option>
-                    <option>CRV/USDT</option>
-                    <option>BAL/USDT</option>
-                    <option>CHZ/USDT</option>
-                    <option>ENJ/USDT</option>
-                    <option>FTT/USDT</option>
-                    <option>HBAR/USDT</option>
-                    <option>HOT/USDT</option>
-                    <option>KSM/USDT</option>
-                    <option>LRC/USDT</option>
-                    <option>MKR/USDT</option>
-                    <option>OMG/USDT</option>
-                    <option>PAX/USDT</option>
-                    <option>QTUM/USDT</option>
-                    <option>RVN/USDT</option>
-                    <option>SRM/USDT</option>
-                    <option>STMX/USDT</option>
-                    <option>SXP/USDT</option>
-                    <option>TOMO/USDT</option>
-                    <option>TRB/USDT</option>
-                    <option>TWT/USDT</option>
-                    <option>USDT/USDT</option>
-                    <option>VTHO/USDT</option>
-                    <option>XVS/USDT</option>
-                    <option>ZIL/USDT</option>
-                  </select>
-
-                </div>
-
-              </div>
-              <div class="col-12 col-md-4">
-
-                <!-- Last name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Type
-                  </label>
-
-                  <!-- Dropdown -->
-                  <select class="form-select mb-3" data-choices name="type">
-                    <option>Select Type</option>
-                    <option>Market</option>
-                  </select>
-
-
-                </div>
-
-              </div>
-              <div class="col-12 col-md-4">
-
-                <!-- First name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Side
-                  </label>
-
-                  <!-- drowpdown -->
-                  <select class="form-select mb-3" data-choices name="side">
-                    <option>Select Side</option>
-                    <option>Buy</option>
-                    <option>Sell</option>
-                  </select>
-                </div>
-
-              </div>
-              <div class="col-12 col-md-4">
-
-                <!-- First name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Lot Size
-                  </label>
-
-                  <!-- input -->
-                  <input type="number" id="lot_size" class="form-control" placeholder="0" name="lot_size" />
-
-                </div>
-
-              </div>
-              <div class="col-12 col-md-4">
-
-                <!-- First name -->
-                <div class="form-group">
-
-                  <!-- Label -->
-                  <label class="form-label">
-                    Stop Loss
-                  </label>
-
-                  <!-- input -->
-                  <input type="number" id="stop_loss" class="form-control" placeholder="0.00" name="stopLoss" />
-                </div>
-
-              </div>
-
-            </div> <!-- / .row -->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <p class="text-danger">{{error}}</p>
-            </div>
-            <!-- Button -->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn text-white btn-color">
-                Make Position
-              </button>
-
-            </div>
-
-          </form>
-
-
-        </div>
-      </div>
-
-      <br>
-      <div class="tab-content">
-        <div class="tab-pane fade show active" id="contactsListPane" role="tabpanel" aria-labelledby="contactsListTab">
-
-          <!-- Card -->
-          <div class="card"
-            data-list='{"valueNames": ["item-symbol", "item-exchange", "item-side", "item-sl", "item-price", "item-qty"], "page": 10, "pagination": {"paginationClass": "list-pagination"}}'
-            id="contactsList">
-            <div class="card-header">
-
-              <h2 class="card-header-title">
-                Postions
-              </h2>
-              <div class="col-auto">
-
-                <!-- Dropdown -->
-                <div class="dropdown">
-
-                  <!-- Toggle -->
-                  <button class="btn btn-danger" id="senddata">
-                    Close Position
-                  </button>
-                </div>
-
-              </div>
-
-
-            </div>
-            <div class="card-header">
-
-              <div class="row align-items-center">
-                <div class="col">
-
-                  <!-- Form -->
-                  <form>
-                    <div class="input-group input-group-flush input-group-merge input-group-reverse">
-                      <input class="form-control list-search" type="search" placeholder="Search">
-                      <span class="input-group-text">
-                        <i class="fe fe-search"></i>
-                      </span>
-                    </div>
-                  </form>
-
-                </div>
-
-              </div> <!-- / .row -->
-            </div>
-            <div class="table-responsive">
-              <table class="table table-sm table-hover table-nowrap card-table">
-                <thead>
-                  <tr>
-
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-symbol" href="#">Symbol</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-exchange" href="#">Exchange</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-type" href="#">Type</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-side" href="#">Side</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-price" href="#">Price</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-qty" href="#">QTY</a>
-                    </th>
-                    <th>
-                      <a class="list-sort text-muted" data-sort="item-sl" href="#">SL</a>
-                    </th>
-                    <th>
-
-                      <!-- Checkbox -->
-                      <div class="form-check mb-n2">
-                        <input class="form-check-input list-checkbox-all" id="listCheckboxAll" type="checkbox">
-                        <label class="form-check-label" for="listCheckboxAll"></label>
-                      </div>
-
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="list font-size-base">
-                  {% for symbol, order_info in order_history.items %}
-                  <tr>
-                    <td>
-
-                      <!-- Email -->
-                      <a class="item-symbol text-reset">{{ symbol }}</a>
-
-                    </td>
-                    <td>
-
-                      <!-- Text -->
-                      <span class="item-exchange">{{ order_info.exchange }}</span>
-
-                    </td>
-                    <td>
-
-                      <!-- Text -->
-                      <span class="item-type">{{ order_info.type }}</span>
-
-                    </td>
-
-                    <td>
-                      {% if order_info.side == 'LONG' %}
-                      <a class="item-side text-reset badge bg-soft-success">{{ order_info.side }}</a>
-                      {% elif order_info.side == 'SHORT' %}
-                      <a class="item-side text-reset badge bg-soft-danger">{{ order_info.side }}</a>
-                      {% else %}
-                      <!-- Handle other cases if needed -->
-                      <a class="item-side text-reset badge">{{ order_info.side }}</a>
-                      {% endif %}
-                    </td>
-                    <td>
-
-                      <!-- Badge -->
-                      <span class="item-price">{{order_info.price}}</span>
-
-                    </td>
-                    <td>
-
-                      <!-- Link -->
-                      <a class="item-qty text-reset">{{ order_info.lotsize }}</a>
-
-                    </td>
-                    <td>
-
-                      <!-- Link -->
-                      <a class="item-sl text-reset">{{ order_info.stopLoss }}</a>
-
-                    </td>
-
-                    <td>
-
-                      <!-- Checkbox -->
-                      <div class="form-check justify-content-end">
-                        <input class="form-check-input list-checkbox" id="listCheckboxOne" type="checkbox">
-                        <label class="form-check-label" for="listCheckboxOne"></label>
-                      </div>
-
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-
-              <!-- Pagination (prev) -->
-              <ul class="list-pagination-prev pagination pagination-tabs card-pagination">
-                <li class="page-item">
-                  <a class="page-link pl-0 pr-4 border-right" href="#">
-                    <i class="fe fe-arrow-left mr-1"></i> Prev
-                  </a>
-                </li>
-              </ul>
-
-              <!-- Pagination -->
-              <ul class="list-pagination pagination pagination-tabs card-pagination">
-                1
-              </ul>
-
-              <!-- Pagination (next) -->
-              <ul class="list-pagination-next pagination pagination-tabs card-pagination">
-                <li class="page-item">
-                  <a class="page-link pl-4 pr-0 border-left" href="#">
-                    Next <i class="fe fe-arrow-right ml-1"></i>
-                  </a>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <br>
-    </div>
-  </div>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-  <script src="{% static 'js/vendor.bundle.js' %}"></script>
-  <script src="{% static 'js/theme.bundle.js' %}"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-      var checkboxes = document.querySelectorAll('.list-checkbox');
-      var closePositionButton = document.getElementById('senddata');
-
-      closePositionButton.addEventListener('click', function () {
-          var checkedSymbols = Array.from(checkboxes)
-              .filter(function (checkbox) {
-                  return checkbox.checked;
-              })
-              .map(function (checkbox) {
-                  return checkbox.closest('tr').querySelector('.item-symbol').innerText;
-              });
-
-          // Check if at least one checkbox is checked
-          if (checkedSymbols.length > 0) {
-              // Send a POST request with the selected symbols
-              var formData = new FormData();
-              formData.append('selected_symbols', JSON.stringify(checkedSymbols));
-
-              fetch('/close_position/', {
-                  method: 'POST',
-                  body: formData,
-                  headers: {
-                      'X-CSRFToken': '{{ csrf_token }}',  // Add this line if using Django's CSRF protection
-                      // Add other headers if needed
-                  },
-              })
-              .then(response => response.json())
-              .then(data => {
-                  console.log('POST request successful:', data);
-                  
-                  // You can perform additional actions based on the server response if needed
-              })
-              .catch(error => {
-                  console.error('Error:', error);
-              });
-          } else {
-              console.log('No checkboxes are selected.');
-              // Handle the case where no checkboxes are selected
-          }
+    <script src="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+    <script src="{% static 'js/vendor.bundle.js' %}"></script>
+    <script src="{% static 'js/theme.bundle.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var closePositionButton = document.getElementById("senddata");
+
+      closePositionButton.addEventListener("click", function () {
+        fetch("/close_position/", {
+          //use get and post both method
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}", // Add this line if using Django's CSRF protection
+
+            // Add other headers if needed
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("POST request successful:");
+            // You can perform additional actions based on the server response if needed
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        // Handle the case where no checkboxes are selected
       });
-  });
-</script>
+    });
 
+    document.addEventListener("DOMContentLoaded", function () {
+      var modifySLButton = document.getElementById("breakevenpos");
+      var exchange = document.getElementById("exchange");
+      var symbol = document.getElementById("symbol");
+
+      modifySLButton.addEventListener("click", function () {
+        fetch("/b_e_position/", {
+          //use get and post both method
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}", // Add this line if using Django's CSRF protection
+
+            // Add other headers if needed
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("POST request successful:");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var modifySLButton = document.getElementById("btnmodifysl");
+      var exchange = document.getElementById("exchange");
+      var symbol = document.getElementById("symbol");
+      var modifysl = document.getElementById("valmodifysl");
+
+      modifySLButton.addEventListener("click", function () {
+        var formdata = new FormData();
+        formdata.append("exchange", exchange.value);
+        formdata.append("symbol", symbol.value);
+        formdata.append("modifysl", modifysl.value);
+
+        fetch("/modify_sl/", {
+          method: "POST",
+          body: formdata,
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}", // Add this line if using Django's CSRF protection
+            // Add other headers if needed
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("POST request successful:" + data);
+
+            // You can perform additional actions based on the server response if needed
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        // Handle the case where no checkboxes are selected
+      });
+    });
+  </script>
 </html>
+  
