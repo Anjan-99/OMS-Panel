@@ -181,87 +181,87 @@ def close_position(request):
     return  render(request ,'hello.html' )
 
 
-def b_e_pos(request):
-    # break even position modify stoploss and move it to entry price and modifiy the order
-    if request.method == 'POST':
-        try:
-            #read the json
-            tracked = fetch_data()
-            print(tracked)
-            #get the first symbol from the json
-            symbol = list(tracked.keys())[0]
-            print(symbol)
-            # check if the json is empty
-            if not tracked:
-                return  render(request, 'hello.html' )
-            else:
-                # make a list of symbols from the json
-                #modify the order
-                client = Client(api_key=binance_api_key, api_secret=binance_api_secret, tld='com')
+# def b_e_pos(request):
+#     # break even position modify stoploss and move it to entry price and modifiy the order
+#     if request.method == 'POST':
+#         try:
+#             #read the json
+#             tracked = fetch_data()
+#             print(tracked)
+#             #get the first symbol from the json
+#             symbol = list(tracked.keys())[0]
+#             print(symbol)
+#             # check if the json is empty
+#             if not tracked:
+#                 return  render(request, 'hello.html' )
+#             else:
+#                 # make a list of symbols from the json
+#                 #modify the order
+#                 client = Client(api_key=binance_api_key, api_secret=binance_api_secret, tld='com')
                 
-                stoploss = tracked[symbol]['price']
-                tracked[symbol]['stopLoss'] = stoploss
-                try:
-                    print("order modified successfully.")
-                    with open('tracked.json', 'w') as f:
-                        json.dump(tracked, f)
-                except Exception as e:
-                    print(e)
-                    return render(request, 'hello.html')
+#                 stoploss = tracked[symbol]['price']
+#                 tracked[symbol]['stopLoss'] = stoploss
+#                 try:
+#                     print("order modified successfully.")
+#                     with open('tracked.json', 'w') as f:
+#                         json.dump(tracked, f)
+#                 except Exception as e:
+#                     print(e)
+#                     return render(request, 'hello.html')
                 
                     
-        except Exception as e:
-            print(e)
-            return  render(request, 'hello.html', {'error1': e} )
+#         except Exception as e:
+#             print(e)
+#             return  render(request, 'hello.html', {'error1': e} )
 
-    return  render(request ,'hello.html' )
+#     return  render(request ,'hello.html' )
 
-def modify_sl(request):
-    if request.method == 'POST':
-        try:
-            #read the json
-            tracked = fetch_data()
-            print(tracked)
-            #get the first symbol from the json
-            print(request.POST)
+# def modify_sl(request):
+#     if request.method == 'POST':
+#         try:
+#             #read the json
+#             tracked = fetch_data()
+#             print(tracked)
+#             #get the first symbol from the json
+#             print(request.POST)
             
-            exchange = str(request.POST.get('exchange'))
-            symbol = str(request.POST.get('symbol'))
-            modify_stopLoss = float(request.POST.get('modifysl'))
+#             exchange = str(request.POST.get('exchange'))
+#             symbol = str(request.POST.get('symbol'))
+#             modify_stopLoss = float(request.POST.get('modifysl'))
             
-            symbol = symbol.replace('/','')
-            if exchange == 'Binance':
-                if modify_stopLoss > 0.0:
-                    if symbol in tracked:
-                        client = Client(api_key=binance_api_key, api_secret=binance_api_secret, tld='com')
+#             symbol = symbol.replace('/','')
+#             if exchange == 'Binance':
+#                 if modify_stopLoss > 0.0:
+#                     if symbol in tracked:
+#                         client = Client(api_key=binance_api_key, api_secret=binance_api_secret, tld='com')
                         
-                        tracked[symbol]['stopLoss'] = modify_stopLoss
-                        try:
-                            print("order modified successfully.")
-                            with open('tracked.json', 'w') as f:
-                                json.dump(tracked, f)
-                        except Exception as e:
-                            print(e)
-                            return render(request, 'hello.html')
-                    else:
-                        e = 'No position to modify.'
-                        print(e)
-                        return  render(request, 'hello.html' )
-                else:
-                    e = 'Please enter a valid stoploss.'
-                    print(e)
-                    return  render(request, 'hello.html')
+#                         tracked[symbol]['stopLoss'] = modify_stopLoss
+#                         try:
+#                             print("order modified successfully.")
+#                             with open('tracked.json', 'w') as f:
+#                                 json.dump(tracked, f)
+#                         except Exception as e:
+#                             print(e)
+#                             return render(request, 'hello.html')
+#                     else:
+#                         e = 'No position to modify.'
+#                         print(e)
+#                         return  render(request, 'hello.html' )
+#                 else:
+#                     e = 'Please enter a valid stoploss.'
+#                     print(e)
+#                     return  render(request, 'hello.html')
                 
-            # elif exchange == 'Bybit':
-            #     e = 'Please select a valid exchange.'
-            #     tracked = fetch_data()
-            #     return  render(request, 'hello.html')
+#             # elif exchange == 'Bybit':
+#             #     e = 'Please select a valid exchange.'
+#             #     tracked = fetch_data()
+#             #     return  render(request, 'hello.html')
             
-        except Exception as e:
-            print(e)
-            return  render(request, 'hello.html' )
+#         except Exception as e:
+#             print(e)
+#             return  render(request, 'hello.html' )
         
-    return  render(request ,'hello.html' )
+#     return  render(request ,'hello.html' )
             
                         
                         

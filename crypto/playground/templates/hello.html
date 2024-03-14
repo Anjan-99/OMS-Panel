@@ -172,54 +172,21 @@
                       step="0.01"
                     />
                   </div> 
-              </div>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button
-                  type="button"
-                  class="btn-sm text-white btn-color"
-                  id="breakevenpos"
-                >
-                  B.E. Pos
-                </button>
-                <!-- add space b/w both button -->
-                <div style="width: 10px"></div>
-                <button
-                  type="button"
-                  class="btn-sm btn-color"
-                  id="btnmodifysl"
-                  disabled
-                >
-                  Modify SL
-                </button>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="submit" class="btn-sm text-white btn-success">
+                    Make Position
+                  </button>
+                  <!-- add space b/w both button -->
+                  <div style="width: 10px"></div>
+                  <button type="button" class="btn-sm btn-danger" id="senddata">
+                    Close Position
+                  </button>
+                </div>
 
-                <div style="width: 10px"></div>
-                <button type="submit" class="btn-sm text-white btn-success">
-                  Make Position
-                </button>
-                <!-- add space b/w both button -->
-                <div style="width: 10px"></div>
-                <button type="button" class="btn-sm btn-danger" id="senddata">
-                  Close Position
-                </button>
-              </div>
+                
             </form>
-            <script>
-              document
-                .getElementById("type")
-                .addEventListener("change", function () {
-                  if (this.value === "Modify") {
-                    document.getElementById("modifysl").style.display = "block";
-                    document.getElementById("stoploss").style.display = "none";
-                    //enble the button
-                    document.getElementById("btnmodifysl").disabled = false;
-                  } else {
-                    document.getElementById("modifysl").style.display = "none";
-                    document.getElementById("stoploss").style.display = "block";
-                    //disable the button
-                    document.getElementById("btnmodifysl").disabled = true;
-                  }
-                });
-            </script>
+            
           </div>
         </div>
       </div>
@@ -257,63 +224,6 @@
       });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      var modifySLButton = document.getElementById("breakevenpos");
-      var exchange = document.getElementById("exchange");
-      var symbol = document.getElementById("symbol");
-
-      modifySLButton.addEventListener("click", function () {
-        fetch("/b_e_position/", {
-          //use get and post both method
-          method: "POST",
-          headers: {
-            "X-CSRFToken": "{{ csrf_token }}", // Add this line if using Django's CSRF protection
-
-            // Add other headers if needed
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("POST request successful:");
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      var modifySLButton = document.getElementById("btnmodifysl");
-      var exchange = document.getElementById("exchange");
-      var symbol = document.getElementById("symbol");
-      var modifysl = document.getElementById("valmodifysl");
-
-      modifySLButton.addEventListener("click", function () {
-        var formdata = new FormData();
-        formdata.append("exchange", exchange.value);
-        formdata.append("symbol", symbol.value);
-        formdata.append("modifysl", modifysl.value);
-
-        fetch("/modify_sl/", {
-          method: "POST",
-          body: formdata,
-          headers: {
-            "X-CSRFToken": "{{ csrf_token }}", // Add this line if using Django's CSRF protection
-            // Add other headers if needed
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("POST request successful:" + data);
-
-            // You can perform additional actions based on the server response if needed
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-        // Handle the case where no checkboxes are selected
-      });
-    });
   </script>
 </html>
   
